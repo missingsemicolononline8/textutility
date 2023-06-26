@@ -1,33 +1,38 @@
-import './App.css';
-
+import { useState } from "react";
+import "./App.css";
+import About from "./components/About";
+import Navbar from "./components/Navbar";
+import TextForm from "./components/TextForm";
 
 function App() {
+  let [darkMode, setDarkMode] = useState(false);
+
+  function changeMode(e) {
+    setDarkMode(!darkMode);
+  }
+
+  let accordionStyle = darkMode
+    ? {
+        border: "1px solid white",
+        borderRadius: "0",
+      }
+    : null;
+
+  let modeButtonText = darkMode ? "Light" : "Dark";
+
+  let modeButtonClass = darkMode ? "btn-dark" : "btn-light";
   return (
     <>
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-  <div className="container-fluid">
-    <a className="navbar-brand" href="/">TextUtils</a>
-    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-        <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="/">Home</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="/">About</a>
-        </li>
-        
-        
-      </ul>
-      <form className="d-flex">
-        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-        <button className="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav>
+      <Navbar title="TextUtils" aboutText="About Us" />
+      <div className={"py-4 w-100 min-vh-100 " + (darkMode ? "darkMode" : "")}>
+        {/* <About accordionStyle={accordionStyle} /> */}
+        <TextForm heading="Enter the text to analyse" />
+        <div className="container my-4">
+          <button className={"btn " + modeButtonClass} onClick={changeMode}>
+            Enable {modeButtonText} Mode
+          </button>
+        </div>
+      </div>
     </>
   );
 }
