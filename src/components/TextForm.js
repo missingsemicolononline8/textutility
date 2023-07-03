@@ -63,7 +63,7 @@ export default function TextForm(props) {
     let chars = text.split("");
     let newText = chars
       .map((ch) => {
-        if (ch == ch.toUpperCase()) {
+        if (ch === ch.toUpperCase()) {
           return ch.toLowerCase();
         } else {
           return ch.toUpperCase();
@@ -151,7 +151,7 @@ export default function TextForm(props) {
     </>
   );
 
-  let wordCount = text.trim() !== "" && text.trim().split(" ");
+  let wordCount = text.split(" ").filter((el) => el.length!==0);
 
   return (
     <>
@@ -167,35 +167,35 @@ export default function TextForm(props) {
             value={text}
           ></textarea>
         </div>
-        <button className="btn btn-primary" onClick={handleUpClick}>
+        <button disabled={text.length===0} className="btn btn-primary" onClick={handleUpClick}>
           Uppercase
         </button>
-        <button className="btn btn-warning ms-3" onClick={handleLowClick}>
+        <button disabled={text.length===0} className="btn btn-warning ms-3" onClick={handleLowClick}>
           Lowercase
         </button>
-        <button className="btn btn-success ms-3" onClick={handleAlternateClick}>
+        <button disabled={text.length===0} className="btn btn-success ms-3" onClick={handleAlternateClick}>
           Alternate Case
         </button>
-        <button className="btn btn-light ms-3" onClick={handleTitleClick}>
+        <button disabled={text.length===0} className="btn btn-light ms-3" onClick={handleTitleClick}>
           Title Case
         </button>
-        <button className="btn btn-dark ms-3" onClick={handleSentenceClick}>
+        <button disabled={text.length===0} className="btn btn-dark ms-3" onClick={handleSentenceClick}>
           Sentence Case
         </button>
-        <button className="btn btn-info ms-3" onClick={handleInverseClick}>
+        <button disabled={text.length===0} className="btn btn-info ms-3" onClick={handleInverseClick}>
           Inverse Case
         </button>
-        <button className="btn btn-danger ms-3" onClick={handleClearClick}>
+        <button disabled={text.length===0} className="btn btn-danger ms-3" onClick={handleClearClick}>
           Clear
         </button>
-        <button className="btn btn-link ms-3" onClick={handleReadClick}>
+        <button disabled={text.length===0} className="btn btn-link ms-3" onClick={handleReadClick}>
           Read
         </button>
       </div>
       <div className="container my-2">
         <h2>Your text summary</h2>
         <p>
-          {wordCount.length ?? 0} words, {text ? text.length : 0} characters
+          {wordCount.length} words, {text ? text.length : 0} characters
         </p>
         <p>{Math.floor((text ? text.split(" ").length : 0) * 0.008)} Minutes</p>
         {preview}

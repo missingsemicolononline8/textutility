@@ -46,12 +46,8 @@ function App() {
   }, [alert]);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div data-bs-theme={Mode}>
+    <>
+      {/* <div data-bs-theme={Mode}>
               <Navbar
                 title="TextUtils"
                 aboutText="About Us"
@@ -66,28 +62,58 @@ function App() {
                 }`}
                 style={{ "--color": nightTheme }}
               >
-                <Outlet />
-              </div>
-            </div>
-          }
-        >
-          <Route
-            index
-            element={
-              <TextForm
+                <TextForm
                 showAlert={showAlert}
                 heading="Enter the text to analyse"
               />
-            }
-          />
+              </div>
+              
+            </div>
+             */}
+
+      <BrowserRouter>
+        <Routes>
           <Route
-            path="about"
-            element={<About accordionStyle={accordionStyle} />}
-          />
-          <Route path="/about/us" element={<div>Wooohoooo</div>} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+            path="/"
+            element={
+              <div data-bs-theme={Mode}>
+                <Navbar
+                  title="TextUtils"
+                  aboutText="About Us"
+                  mode={Mode}
+                  revMode={reverseMode}
+                  toggleMode={changeMode}
+                  setNightTheme={setNightTheme}
+                />
+                <div
+                  className={`py-4 w-100 min-vh-100 ${
+                    Mode !== "light" && "darkMode"
+                  }`}
+                  style={{ "--color": nightTheme }}
+                >
+                  <Outlet />
+                </div>
+              </div>
+            }
+          >
+            <Route
+              index
+              element={
+                <TextForm
+                  showAlert={showAlert}
+                  heading="Try TextUtility - Word Counter, Character Counter, Remove Extra Spaces"
+                />
+              }
+            />
+            <Route
+              path="about"
+              element={<About accordionStyle={accordionStyle} />}
+            />
+            <Route path="/about/us" element={<div>Wooohoooo</div>} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
