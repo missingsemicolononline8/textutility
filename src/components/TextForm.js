@@ -151,7 +151,7 @@ export default function TextForm(props) {
     </>
   );
 
-  let wordCount = text.split(" ").filter((el) => el.length!==0);
+  let wordCount = text.split(/\s+/).filter((el) => el.length!==0);
 
   return (
     <>
