@@ -78,24 +78,52 @@ export default function TextForm(props) {
     setText("");
   }
 
+  function handleEditClick() {
+    setText(result);
+  }
+
   function handleCopyClick() {
     navigator.clipboard.writeText(result);
-    alert("Copied Successfully");
+    props.showAlert("Copied to Clipboard", "success");
   }
 
   function handleReadClick(e) {
-    let speech = new SpeechSynthesisUtterance();
-    speech.text = text;
-    window.speechSynthesis.speak(speech);
+    if (text.length) {
+      let speech = new SpeechSynthesisUtterance();
+      speech.text = text;
+      window.speechSynthesis.speak(speech);
+    } else props.showAlert("Nothing to read", "warning");
   }
 
-  let preview = result ? (
+  let preview = result && (
     <>
-      <h2>Preview</h2>
+      <h2>Result</h2>
       <p
         style={{ whiteSpace: "pre-wrap" }}
         className="text-break position-relative"
       >
+        <button
+          className="btn d-flex align-items-center gap-2 position-absolute p-0"
+          style={{ top: "-36px", right: "80px" }}
+          onClick={handleEditClick}
+        >
+          <svg
+            stroke="currentColor"
+            fill="none"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="h-4 w-4"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+          </svg>
+          Edit
+        </button>
         <button
           className="btn d-flex align-items-center gap-2 position-absolute p-0"
           style={{ top: "-36px", right: 0 }}
@@ -121,9 +149,10 @@ export default function TextForm(props) {
         {result}
       </p>
     </>
-  ) : null;
+  );
 
-  //text = "new text"; // Wrong way to set text
+  let wordCount = text.trim() !== "" && text.trim().split(" ");
+
   return (
     <>
       <div className="container">
@@ -166,8 +195,7 @@ export default function TextForm(props) {
       <div className="container my-2">
         <h2>Your text summary</h2>
         <p>
-          {text ? text.split(" ").length : 0} words, {text ? text.length : 0}{" "}
-          characters
+          {wordCount.length ?? 0} words, {text ? text.length : 0} characters
         </p>
         <p>{Math.floor((text ? text.split(" ").length : 0) * 0.008)} Minutes</p>
         {preview}
