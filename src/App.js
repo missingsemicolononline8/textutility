@@ -78,7 +78,7 @@ function App() {
             element={
               <div data-bs-theme={Mode}>
                 <Navbar
-                  title="TextUtils"
+                  title="Prowordcounterai"
                   aboutText="About Us"
                   mode={Mode}
                   revMode={reverseMode}

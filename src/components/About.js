@@ -24,7 +24,7 @@ export default function About(props) {
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
-            Textutils gives you a way to analyze your text quickly and efficiently. Be it word count, character count or
+            Textutils gives you a way to analyze your text quickly and efficiently. Be it word count, character count or Keyword Analysis
             </div>
           </div>
         </div>
