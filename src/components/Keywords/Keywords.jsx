@@ -20,7 +20,7 @@ function Keywords({ inputText, highlightKeyWord }) {
         const formData = new FormData();
         formData.append(
           "api_key",
-          "nAQDbLFJmEPdNc38ypbDdydQpQNsNGz2MSwXAsDOI6s"
+          process.env.REACT_APP_PARALLELDOTSAPI
         );
         formData.append("text", inputText);
         const options = {
@@ -82,10 +82,7 @@ function Keywords({ inputText, highlightKeyWord }) {
   const renderFilteredKeywords = (keywordLength, score) =>
     keywords
       .filter(
-        (
-          kw /* keywordLength === 3 && kw.keyword.split(" ").length >= 3) ||
-          (keywordLength !== 3 && */
-        ) =>
+        kw =>
           kw.keyword.split(" ").length === keywordLength &&
           kw.confidence_score > score
       )
@@ -114,7 +111,7 @@ function Keywords({ inputText, highlightKeyWord }) {
             </h5>
             <ul
               className="nav nav-pills keyword-filter"
-              id="pills-tab"
+              id="kwLength-tab"
               role="tablist"
             >
               <li className="nav-item" role="presentation">
@@ -122,10 +119,10 @@ function Keywords({ inputText, highlightKeyWord }) {
                   className="nav-link fs-6 active"
                   id="pills-home-tab"
                   data-bs-toggle="pill"
-                  data-bs-target="#pills-home"
+                  data-bs-target="#one-word-keywords"
                   type="button"
                   role="tab"
-                  aria-controls="pills-home"
+                  aria-controls="one-word-keywords"
                   aria-selected="true"
                 >
                   x1
@@ -136,10 +133,10 @@ function Keywords({ inputText, highlightKeyWord }) {
                   className="nav-link fs-6"
                   id="pills-profile-tab"
                   data-bs-toggle="pill"
-                  data-bs-target="#pills-profile"
+                  data-bs-target="#two-word-keywords"
                   type="button"
                   role="tab"
-                  aria-controls="pills-profile"
+                  aria-controls="two-word-keywords"
                   aria-selected="false"
                 >
                   x2
@@ -150,10 +147,10 @@ function Keywords({ inputText, highlightKeyWord }) {
                   className="nav-link fs-6"
                   id="pills-contact-tab"
                   data-bs-toggle="pill"
-                  data-bs-target="#pills-contact"
+                  data-bs-target="#three-word-keywords"
                   type="button"
                   role="tab"
-                  aria-controls="pills-contact"
+                  aria-controls="three-word-keywords"
                   aria-selected="false"
                 >
                   x3
@@ -163,28 +160,28 @@ function Keywords({ inputText, highlightKeyWord }) {
           </div>
 
           <div className="kw-body mt-3">
-            <div className="tab-content" id="pills-tabContent">
+            <div className="tab-content" id="kwLength-tabContent">
               <div
                 className="tab-pane fade show active"
-                id="pills-home"
+                id="one-word-keywords"
                 role="tabpanel"
-                aria-labelledby="pills-home-tab"
+                aria-labelledby="one-word-keywords-tab"
               >
                 {renderFilteredKeywords(1, 0.4)}
               </div>
               <div
                 className="tab-pane fade"
-                id="pills-profile"
+                id="two-word-keywords"
                 role="tabpanel"
-                aria-labelledby="pills-profile-tab"
+                aria-labelledby="two-word-keywords-tab"
               >
                 {renderFilteredKeywords(2, 0.4)}
               </div>
               <div
                 className="tab-pane fade"
-                id="pills-contact"
+                id="three-word-keywords"
                 role="tabpanel"
-                aria-labelledby="pills-contact-tab"
+                aria-labelledby="three-word-keywords-tab"
               >
                 {renderFilteredKeywords(3, 0.4)}
               </div>

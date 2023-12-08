@@ -57,10 +57,11 @@ export const updateEditorContent = (textbox, selectionState, content,setTextbox,
       content
     );
 
+
     const newEditorState = EditorState.push(
       textbox,
       modifiedContent,
-      "insert-characters"
+      
     );
     setTextbox(newEditorState);
 }

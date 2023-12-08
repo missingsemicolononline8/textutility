@@ -1,8 +1,9 @@
 div.DraftEditor-root {
     border: 1px solid #000;
-
     height: 400px;    
     overflow-y: auto;
+    padding: 5px;
+
   }
   div.DraftEditor-editorContainer,
   div.public-DraftEditor-content {
@@ -11,4 +12,9 @@ div.DraftEditor-root {
 
   span.highlight {
     background-color: yellow;
+  }
+
+  .nav {
+    --bs-nav-link-font-weight: 600;
+    --bs-nav-link-font-size:0.8rem
   }
