@@ -203,12 +203,23 @@ export default function TextForm(props) {
   }
 
   function handleReadClick(e) {
-    if (operativeText.length) {
-      let speech = new SpeechSynthesisUtterance();
-      speech.text = operativeText;
-      window.speechSynthesis.speak(speech);
-    } else props.showAlert("Nothing to read", "warning");
+    // Check if speech synthesis is currently speaking
+    if (window.speechSynthesis.speaking) {
+      // If speaking, stop the speech
+      window.speechSynthesis.cancel();
+    } else {
+      // If not speaking, proceed to read the text
+      if (operativeText.length) {
+        let speech = new SpeechSynthesisUtterance();
+        speech.text = operativeText;
+        window.speechSynthesis.speak(speech);
+      } else {
+        // Show an alert if there is nothing to read
+        props.showAlert("Nothing to read", "warning");
+      }
+    }
   }
+  
 
   let preview = result && (
     <>
